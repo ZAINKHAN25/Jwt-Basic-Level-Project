@@ -7,14 +7,9 @@ const secretKey = 'mysecretkey';
 
 app.use(express.json());
 
-const user = {
-    id: 1,
-    username: 'Zain',
-    role: 'admin'
-};
 
-app.get('/generate-token', (req, res) => {
-    const token = jwt.sign(user, secretKey, { expiresIn: '1h' });
+app.post('/generate-token', (req, res) => {
+    const token = jwt.sign(req.body.user, secretKey, { expiresIn: '1h' });
     console.log('Generated Token:', token);
     res.send(token);
 });
